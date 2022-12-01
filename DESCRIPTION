@@ -1,0 +1,17 @@
+Package: StatComp22030
+Type: Package
+Title: Final project for 'Statistical Computing' course
+Version: 1.0
+Date: 2022-11-26
+Author: Dieqi Gu
+Maintainer: Dieqi Gu <gudq@umail.stc.edu.cn>
+Description: This package is used for final project for 'Statistical Computing' course.
+License: GPL (>= 2)
+Imports: Rcpp, microbenchmark, knitr, rmarkdown, quantreg, lpSolve, MASS, boot, bootstrap, DAAG, mediation
+LinkingTo: Rcpp
+RoxygenNote: 7.2.2
+Encoding: UTF-8
+VignetteBuilder: knitr
+URL: http://github.com/gudq99/StatComp22030
+BugReports: http://github.com/gudq99/StatComp22030/issues
+

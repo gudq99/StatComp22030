@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="22030" />
+
+<meta name="date" content="2022-12-01" />
+
+<title>Introduction to StatComp22030</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to StatComp22030</h1>
+<h4 class="author">22030</h4>
+<h4 class="date">2022-12-01</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(StatComp22030)</span></code></pre></div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><strong>StatComp22030</strong> is a R package of the final project of
+22030. It conducts a model averaging method for quantile regression,
+using J-fold cross-validation. It also compare the performance of R and
+C++ (implemented through the R package <em>Rcpp</em>) for the
+‘Statistical Computing’ course, using <em>gibbsR</em> for R and
+<em>gibbsC</em> for C++.</p>
+</div>
+<div id="model-averaging-for-quantile-regression" class="section level2">
+<h2>Model averaging for quantile regression</h2>
+<p>We propose a model averaging method for quantile regression and use
+J-fold cross-validation to determine the weights of candidate
+models.</p>
+<p>Let <span class="math inline">\(\left\{\left(y_{i},
+\mathbf{x}_{i}\right)\right\}_{i=1}^{n}\)</span> be a group of
+independent and identically distributed (IID) random samples, where
+<span class="math inline">\(y_i\)</span> is a scalar dependent variable
+and <span class="math inline">\(\mathbf{x}_{i}=\left(x_{i 1}, x_{i 2},
+\ldots, x_{ip}\right)\)</span> is a <span class="math inline">\(p\)</span> dimensional explanatory variable.
+Without loss of generality, assume that the first column of <span class="math inline">\(X\)</span> is 1. We want to predict the <span class="math inline">\(\tau\)</span>th quantile <span class="math inline">\(\mu_{i}\)</span> of <span class="math inline">\(y_i\)</span> using model averaging.</p>
+<p>Consider <span class="math inline">\(M=p\)</span> approximate models
+containing different covariates, where the set of candidate models are
+nested. Write the <span class="math inline">\(m\)</span>th candidate
+model as <span class="math display">\[
+y_{i}=\boldsymbol{\theta}_{(m)}^{\prime}
+\mathbf{x}_{i(m)}+\varepsilon_{i(m)}=\sum_{j=1}^{m} \theta_{j(m)} x_{i
+j(m)}+\varepsilon_{i(m)},
+\]</span> where <span class="math inline">\(\boldsymbol{\theta}_{(m)}
+=\left(\theta_{1(m)}, \ldots, \theta_{m(m)}\right)^{\prime},
+\mathbf{x}_{i(m)}=\left(x_{i 1(m)}, \ldots, x_{i
+m(m)}\right)^{\prime}\)</span>.</p>
+<p>For the <span class="math inline">\(m\)</span>th candidate model, the
+estimator of <span class="math inline">\(\boldsymbol{\theta}_{(m)}\)</span> is given by
+<span class="math display">\[
+\begin{aligned}
+\hat{\boldsymbol{\theta}}_{(m)}
+&amp;=\arg \min _{\boldsymbol{\theta}_{(m)}} \sum_{i=1}^{n}
+\rho_{\tau}\left(y_{i}-\boldsymbol{\theta}_{(m)}^{\prime}
+\mathbf{x}_{i(m)}\right),
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\rho_{\tau}(\lambda)=[\tau-\mathbf{1}\{\lambda
+\leq 0\}]\lambda\)</span> is the check loss.</p>
+<p>Let <span class="math inline">\(\mathbf{w} = \left(w_{1}, \ldots,
+w_{M}\right)^{\prime}\)</span> be a weight vector in <span class="math inline">\(\mathcal{W} =\left\{\mathbf{w} \in[0, 1]^{M}:
+\sum_{m=1}^{M} w_{m}=1\right\}\)</span>. For <span class="math inline">\(i=1, \ldots, n\)</span>, the model averaging
+estimator of <span class="math inline">\(\mu_{i}\)</span> is given by
+<span class="math display">\[
+\hat{\mu}_{i}(\mathbf{w})=\sum_{m=1}^{M} w_{m}
+\mathbf{x}_{i(m)}^{\prime} \hat{\boldsymbol{\theta}}_{(m)}.
+\]</span></p>
+<p>Now we use J-fold cross-validation to choose the weights.</p>
+<p>We randomly divide the dataset into <span class="math inline">\(J\)</span> groups (<span class="math inline">\(J
+\geq 2\)</span> is a positive finite integer), each with <span class="math inline">\(Q=n/J\)</span> observations. For <span class="math inline">\(m = 1, \ldots , M\)</span>, let <span class="math inline">\(\tilde{\boldsymbol{\theta}}_{(m)}^{[-j]}\)</span>
+denotes the estimator of <span class="math inline">\(\boldsymbol{\theta}_{(m)}\)</span> in the <span class="math inline">\(m\)</span>th model after leaving out the <span class="math inline">\(j\)</span>th group of observations. For <span class="math inline">\(i=(j-1)Q+1,\ldots, jQ\)</span> in the <span class="math inline">\(j\)</span>th grounp, we form the estimator of
+<span class="math inline">\(\mu_i\)</span> as <span class="math inline">\(\tilde{\mu}_{i}^{[-j]}(\mathbf{w}) =
+\sum_{m=1}^{M} w_{m} \mathbf{x}_{i(m)}^{ \prime}
+\tilde{\boldsymbol{\theta}}_{(m)}^{[-j]}.\)</span></p>
+<p>Our JCV criterion is formulated as <span class="math display">\[\begin{equation}\label{eq:weight_criterion}
+\operatorname{CV}_{n}^J(\mathbf{w})=\frac{1}{n}
+\sum_{j=1}^{J} \sum_{q=1}^{Q}
+\rho_{\tau}\left(y_{(j-1)Q+q}-\tilde{\mu}_{(j-1)Q+q}^{[-j]}
+(\mathbf{w})\right).
+\end{equation}\]</span> The JCV weight vector <span class="math inline">\(\hat{\mathbf{w}}=\left(\hat{w}_{1}, \ldots,
+\hat{w}_{M}\right)&#39;\)</span> is obtained by choosing <span class="math inline">\(\mathbf{w} \in \mathcal{W}\)</span> to minimize
+the above criterion function, i.e., <span class="math display">\[\begin{equation}
+\label{eq:argmin}
+\hat{\mathbf{w}}=\arg \min _{\mathbf{w} \in \mathcal{W}} \operatorname{C
+V}^J_{n}(\mathbf{w}).
+\end{equation}\]</span></p>
+<p>We can convert the above constrained optimization problem to the
+following linear programming problem: <span class="math display">\[
+\begin{aligned}
+&amp;\min _{\mathbf{w},  \mathbf{u},  \mathbf{v}}\left\{
+\tau \mathbf{1}_{n}^{\prime} \mathbf{u}+(1-\tau) \mathbf{1}_{n}^{\prime}
+\mathbf{v}\right\} \\
+\text { s.t. } &amp; \sum_{m=1}^{M} w_{m} \mathbf{x}_{((j-1)Q+q)(m)}^{
+\prime} \tilde{\boldsymbol{\theta}}_{(m)}^{[-j]}
++u_{(j-1)Q+q}-v_{(j-1)Q+q}=y_{(j-1)Q+q},  \\
+&amp;u_{(j-1)Q+q}\geq 0,  v_{(j-1)Q+q}\geq 0
+,  j=1,  \ldots,  J,  q=1,  \ldots,  Q,   \\
+&amp;\sum_{m=1}^{M} w_{m}=1,
+0 \leq w_{m} \leq 1,  m=1,  \ldots,  M,
+\end{aligned}
+\]</span> where <span class="math inline">\(\mathbf{u} =\left(u_{1},
+u_{2}, \ldots, u_{n}\right)^{\prime}\)</span> and <span class="math inline">\(\mathbf{v} =\left(v_{1}, v_{2}, \ldots,
+v_{n}\right)^{\prime}\)</span> are the positive and negative slack
+variables and <span class="math inline">\(\mathbf{1}_{n}\)</span> is
+<span class="math inline">\(n \times 1\)</span> vector of ones.</p>
+<p>We first define the indicator function <span class="math inline">\(\mathbf{1}\{e \leq 0\}\)</span>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(e){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  g<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(e))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  g[<span class="fu">which</span>(e<span class="sc">&lt;=</span><span class="dv">0</span>)]<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  g</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following function conducts model averaging by J-fold
+cross-validation.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantreg)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lpSolve)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(X, y, <span class="at">J=</span><span class="dv">5</span>, <span class="at">tau=</span><span class="fl">0.5</span>){</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  data<span class="ot">&lt;-</span><span class="fu">cbind</span>(y,X)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  n<span class="ot">&lt;-</span><span class="fu">length</span>(y)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  Q<span class="ot">&lt;-</span><span class="fu">floor</span>(n<span class="sc">/</span>J)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  M<span class="ot">&lt;-</span><span class="fu">dim</span>(X)[<span class="dv">2</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the estimator of theta in the mth model</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  theta.hat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,M,M)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">suppressWarnings</span>(fit<span class="ot">&lt;-</span><span class="fu">rq</span>(<span class="at">data=</span><span class="fu">data.frame</span>(X[,<span class="dv">1</span><span class="sc">:</span>m]), y<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>.,<span class="at">tau=</span>tau))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    theta.hat[<span class="dv">1</span><span class="sc">:</span>m,m]<span class="ot">&lt;-</span>fit<span class="sc">$</span>coefficients</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># divide the data to J groups</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>J,Q) </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">sample</span>(index,n)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  mu<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>, n, M) </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  y.CV<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>, n) </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># prepare the data for CV</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>J) {</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    data.train<span class="ot">&lt;-</span>data[index<span class="sc">!=</span>j,]</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    data.test<span class="ot">&lt;-</span>data[index<span class="sc">==</span>j,]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">suppressWarnings</span>(rq.m<span class="ot">&lt;-</span><span class="fu">rq</span>(data.train[,<span class="dv">1</span>]<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>.,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                                <span class="at">tau=</span>tau,<span class="at">data=</span><span class="fu">data.frame</span>(data.train[,<span class="sc">-</span><span class="dv">1</span>][,<span class="dv">1</span><span class="sc">:</span>m])))</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>      mu[((j<span class="dv">-1</span>)<span class="sc">*</span>Q<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(j<span class="sc">*</span>Q),m]<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(data.test[,<span class="sc">-</span><span class="dv">1</span>][,<span class="dv">1</span><span class="sc">:</span>m])<span class="sc">%*%</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.matrix</span>(rq.m<span class="sc">$</span>coefficients)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    y.CV[((j<span class="dv">-1</span>)<span class="sc">*</span>Q<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(j<span class="sc">*</span>Q)]<span class="ot">&lt;-</span>data.test[,<span class="dv">1</span>]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  } </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># solve lp to get the weights</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  obj1<span class="ot">&lt;-</span><span class="fu">rep</span>(tau,<span class="at">len=</span>n);obj2<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">-</span>tau,<span class="at">len=</span>n);obj3<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="at">len=</span>M)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  f.obj<span class="ot">&lt;-</span><span class="fu">c</span>(obj1,obj2,obj3)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  con1<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span>M)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  con21<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow =</span> M,<span class="at">ncol =</span> <span class="dv">2</span><span class="sc">*</span>n);</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  con22<span class="ot">&lt;-</span><span class="fu">diag</span>(M);</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  con2<span class="ot">&lt;-</span><span class="fu">cbind</span>(con21,con22) </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  con3<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="at">len=</span><span class="dv">2</span><span class="sc">*</span>n),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="at">len=</span>M))</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  con4<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="fu">diag</span>(n),<span class="sc">-</span><span class="fu">diag</span>(n),mu)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  f.con<span class="ot">&lt;-</span><span class="fu">rbind</span>(con1,con2,con3,con4) </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  f.dir<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;&gt;=&quot;</span>,<span class="at">len=</span><span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span>M),<span class="fu">rep</span>(<span class="st">&quot;&lt;=&quot;</span>,<span class="at">len=</span>M),<span class="fu">rep</span>(<span class="st">&quot;=&quot;</span>,<span class="at">len=</span>n<span class="sc">+</span><span class="dv">1</span>) ) </span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  f.rhs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="at">len=</span><span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span>M),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="at">len=</span>M<span class="sc">+</span><span class="dv">1</span>), y.CV) </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  lp.result<span class="ot">&lt;-</span><span class="fu">lp</span>(<span class="st">&quot;min&quot;</span>, f.obj, f.con, f.dir, f.rhs)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  w.JCVMA<span class="ot">&lt;-</span>lp.result<span class="sc">$</span>solution[(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span>M)]</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  muhat<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(X) <span class="sc">%*%</span> theta.hat</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  y.hat<span class="ot">&lt;-</span>muhat <span class="sc">%*%</span> w.JCVMA</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  PE<span class="ot">&lt;-</span>(tau<span class="sc">-</span><span class="fu">Indic</span>(y<span class="sc">-</span>y.hat))<span class="sc">%*%</span>(y<span class="sc">-</span>y.hat)<span class="sc">/</span>n</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">w.JCVMA=</span>w.JCVMA, <span class="at">theta.hat=</span>theta.hat, <span class="at">y.hat=</span>y.hat, <span class="at">PE=</span>PE))</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following function predicts <span class="math inline">\(\mu\)</span> given covariates <span class="math inline">\(x\)</span>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(x, qrma){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  n<span class="ot">&lt;-</span><span class="fu">dim</span>(x)[<span class="dv">1</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  M<span class="ot">&lt;-</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  muhat<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(x) <span class="sc">%*%</span> qrma<span class="sc">$</span>theta.hat</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  y.hat<span class="ot">&lt;-</span>muhat <span class="sc">%*%</span> qrma<span class="sc">$</span>w.JCVMA</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y.hat)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(express)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(express)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span>express<span class="sc">$</span>y[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>y.s<span class="ot">&lt;-</span>express<span class="sc">$</span>y[<span class="dv">101</span><span class="sc">:</span><span class="dv">150</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>express[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="dv">1</span>,X)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>X.s<span class="ot">&lt;-</span>express[<span class="dv">101</span><span class="sc">:</span><span class="dv">150</span>,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>X.s<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="dv">1</span>,X.s)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>tau<span class="ot">&lt;-</span><span class="fl">0.5</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>qrma.fit<span class="ot">&lt;-</span><span class="fu">qrma</span>(X, y, <span class="at">J=</span><span class="dv">5</span>, <span class="at">tau =</span> tau)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>w<span class="ot">&lt;-</span>qrma.fit<span class="sc">$</span>w.JCVMA <span class="co"># weight</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>PE<span class="ot">&lt;-</span>qrma.fit<span class="sc">$</span>PE <span class="co"># in-sample FPE</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>y.hat<span class="ot">&lt;-</span><span class="fu">predict_qr</span>(X.s,qrma.fit) <span class="co"># estimation</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>tau<span class="ot">&lt;-</span><span class="fl">0.05</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>qrma.fit<span class="ot">&lt;-</span><span class="fu">qrma</span>(X, y, <span class="at">J=</span><span class="dv">5</span>, <span class="at">tau =</span> tau)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>qrma.fit<span class="ot">&lt;-</span><span class="fu">qrma</span>(X, y, <span class="at">J=</span><span class="dv">5</span>, <span class="at">tau =</span> tau)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>w<span class="ot">&lt;-</span>qrma.fit<span class="sc">$</span>w.JCVMA <span class="co"># weight</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>PE<span class="ot">&lt;-</span>qrma.fit<span class="sc">$</span>PE <span class="co"># in-sample FPE</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>y.hat<span class="ot">&lt;-</span><span class="fu">predict_qr</span>(X.s,qrma.fit) <span class="co"># estimation</span></span></code></pre></div>
+</div>
+<div id="benchmarking-gibbsr-and-gibbsc" class="section level2">
+<h2>Benchmarking <em>gibbsR</em> and <em>gibbsC</em></h2>
+<p>The source R code for <em>gibbsR</em> is as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(N) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> N, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  rho <span class="ot">&lt;-</span> <span class="fl">0.9</span> <span class="co"># correlation</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  mu1<span class="ot">&lt;-</span>mu2<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  sigma1<span class="ot">&lt;-</span>sigma2<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  s1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>sigma1</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  s2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>sigma2</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu1 <span class="sc">+</span> rho <span class="sc">*</span> (y <span class="sc">-</span> mu2) <span class="sc">*</span> sigma1<span class="sc">/</span>sigma2, s1)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu2 <span class="sc">+</span> rho <span class="sc">*</span> (x <span class="sc">-</span> mu1) <span class="sc">*</span> sigma2<span class="sc">/</span>sigma1, s2)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    mat[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  mat</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The source R code for <em>gibbsC</em> is as follows:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix <span class="fu">gibbsC</span>(int N) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  NumericMatrix <span class="fu">mat</span>(N, <span class="dv">2</span>);</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  double  rho<span class="ot">=</span><span class="fl">0.9</span>, mu1<span class="ot">=</span><span class="dv">0</span>, mu2<span class="ot">=</span><span class="dv">0</span>, sigma1<span class="ot">=</span><span class="dv">1</span>, sigma2<span class="ot">=</span><span class="dv">1</span>, s1<span class="ot">=</span><span class="dv">0</span>, s2<span class="ot">=</span><span class="dv">0</span>;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  s1 <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">*</span>rho)<span class="sc">*</span>sigma1;</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  s2 <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">*</span>rho)<span class="sc">*</span>sigma2;</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  double x <span class="ot">=</span> <span class="dv">0</span>, y <span class="ot">=</span> <span class="dv">0</span>;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(int <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> N; i<span class="sc">++</span>) {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu1 <span class="sc">+</span> rho <span class="sc">*</span> (y <span class="sc">-</span> mu2) <span class="sc">*</span> sigma1<span class="sc">/</span>sigma2, s1)[<span class="dv">0</span>];</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu2 <span class="sc">+</span> rho <span class="sc">*</span> (x <span class="sc">-</span> mu1) <span class="sc">*</span> sigma2<span class="sc">/</span>sigma1, s2)[<span class="dv">0</span>];</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mat</span>(i, <span class="dv">0</span>) <span class="ot">=</span> x;</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mat</span>(i, <span class="dv">1</span>) <span class="ot">=</span> y;</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mat);</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>We can use R package microbenchmark to compare the performance of C
+functions (gibbsR) and Cpp functions (gibbsC).</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

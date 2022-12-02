@@ -69,18 +69,17 @@ Indic<-function(e){
   g
 }
 
-#' @title Model averaging for quantile regression 
+#' @title Main function used to conduct model averaging for quantile regression 
 #' @description Model averaging for quantile regression by J-fold cross validation.
 #' @param X the covariate matrix (the first column should be 1)
 #' @param y the dependent variable vector
 #' @param J the fold of cross-validation 
 #' @param tau the quantile 
-#' @return A list containing: {
-#' \code{w.JCVMA} a weight vector
-#' \code{theta.hat} a matrix, the mth column represents the estimator of theta in the mth model
-#' \code{y.hat} the prediction of the tau quantile of y given X
-#' \code{PE} the in-sample prediction error
-#' }
+#' @return A list containing: 
+#' \code{w.JCVMA} a weight vector; 
+#' \code{theta.hat} a matrix, the mth column represents the estimator of theta in the mth model; 
+#' \code{y.hat} the prediction of the tau quantile of y given X; 
+#' \code{PE} the in-sample prediction error.
 #' @import quantreg
 #' @import lpSolve
 #' @examples
@@ -89,6 +88,7 @@ Indic<-function(e){
 #' attach(express)
 #' y<-express$y
 #' X<-express[,-1]
+#' X<-cbind(1,X)
 #' qrma.fit<-qrma(X, y)
 #' }
 #' @export
@@ -100,7 +100,7 @@ qrma<-function(X, y, J=5, tau=0.5){
   # the estimator of theta in the mth model
   theta.hat<-matrix(0,M,M)
   for (m in 1:M) {
-    fit<-rq(data=data.frame(X[,1:m]), y~0+.,tau=tau)
+    suppressWarnings(fit<-rq(data=data.frame(X[,1:m]), y~0+.,tau=tau))
     theta.hat[1:m,m]<-fit$coefficients
   }
   # divide the data to J groups
@@ -140,8 +140,8 @@ qrma<-function(X, y, J=5, tau=0.5){
   return(list(w.JCVMA=w.JCVMA, theta.hat=theta.hat, y.hat=y.hat, PE=PE))
 }
 
-#' @title Model averaging for quantile regression 
-#' @description Model averaging for quantile regression by J-fold cross validation.
+#' @title Predict quantiles using model averaging
+#' @description Predict quantiles using model averaging.
 #' @param x the covariate matrix (the first column should be 1)
 #' @param qrma a list return from function \code{qrma}
 #' @return the prediction of the tau quantile of y given x
@@ -152,7 +152,9 @@ qrma<-function(X, y, J=5, tau=0.5){
 #' y<-express$y[1:100]
 #' y.s<-express$y[101:150]
 #' X<-express[1:100,-1]
+#' X<-cbind(1,X)
 #' X.s<-express[101:150,-1]
+#' X.s<-cbind(1,X.s)
 #' qrma.fit<-qrma(X, y)
 #' y.hat<-predict_qr(X.s,qrma.fit)
 #' }

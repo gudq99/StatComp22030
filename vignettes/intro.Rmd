@@ -102,7 +102,7 @@ function(X, y, J=5, tau=0.5){
   # the estimator of theta in the mth model
   theta.hat<-matrix(0,M,M)
   for (m in 1:M) {
-    fit<-rq(data=data.frame(X[,1:m]), y~0+.,tau=tau)
+    suppressWarnings(fit<-rq(data=data.frame(X[,1:m]), y~0+.,tau=tau))
     theta.hat[1:m,m]<-fit$coefficients
   }
   # divide the data to J groups
@@ -115,8 +115,8 @@ function(X, y, J=5, tau=0.5){
     data.train<-data[index!=j,]
     data.test<-data[index==j,]
     for (m in 1:M) {
-      suppressWarnings(rq.m<-rq(data.train[,1]~0+.,tau=tau,
-                                data=data.frame(data.train[,-1][,1:m])))
+      suppressWarnings(rq.m<-rq(data.train[,1]~0+.,
+                                tau=tau,data=data.frame(data.train[,-1][,1:m])))
       mu[((j-1)*Q+1):(j*Q),m]<-as.matrix(data.test[,-1][,1:m])%*%
         as.matrix(rq.m$coefficients)
     }
@@ -161,7 +161,9 @@ attach(express)
 y<-express$y[1:100]
 y.s<-express$y[101:150]
 X<-express[1:100,-1]
+X<-cbind(1,X)
 X.s<-express[101:150,-1]
+X.s<-cbind(1,X.s)
 tau<-0.5
 qrma.fit<-qrma(X, y, J=5, tau = tau)
 w<-qrma.fit$w.JCVMA # weight
@@ -217,7 +219,7 @@ NumericMatrix gibbsC(int N) {
 }
 ```
 
-
+We can use R package microbenchmark to compare the performance of C functions (gibbsR) and Cpp functions (gibbsC).
 
 
 

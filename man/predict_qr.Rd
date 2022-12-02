@@ -2,7 +2,7 @@
 % Please edit documentation in R/StatComp.R
 \name{predict_qr}
 \alias{predict_qr}
-\title{Model averaging for quantile regression}
+\title{Predict quantiles using model averaging}
 \usage{
 predict_qr(x, qrma)
 }
@@ -15,7 +15,7 @@ predict_qr(x, qrma)
 the prediction of the tau quantile of y given x
 }
 \description{
-Model averaging for quantile regression by J-fold cross validation.
+Predict quantiles using model averaging.
 }
 \examples{
 \dontrun{
@@ -24,7 +24,9 @@ attach(express)
 y<-express$y[1:100]
 y.s<-express$y[101:150]
 X<-express[1:100,-1]
+X<-cbind(1,X)
 X.s<-express[101:150,-1]
+X.s<-cbind(1,X.s)
 qrma.fit<-qrma(X, y)
 y.hat<-predict_qr(X.s,qrma.fit)
 }

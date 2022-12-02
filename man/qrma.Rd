@@ -2,7 +2,7 @@
 % Please edit documentation in R/StatComp.R
 \name{qrma}
 \alias{qrma}
-\title{Model averaging for quantile regression}
+\title{Main function used to conduct model averaging for quantile regression}
 \usage{
 qrma(X, y, J = 5, tau = 0.5)
 }
@@ -16,12 +16,11 @@ qrma(X, y, J = 5, tau = 0.5)
 \item{tau}{the quantile}
 }
 \value{
-A list containing: {
-\code{w.JCVMA} a weight vector
-\code{theta.hat} a matrix, the mth column represents the estimator of theta in the mth model
-\code{y.hat} the prediction of the tau quantile of y given X
-\code{PE} the in-sample prediction error
-}
+A list containing: 
+\code{w.JCVMA} a weight vector; 
+\code{theta.hat} a matrix, the mth column represents the estimator of theta in the mth model; 
+\code{y.hat} the prediction of the tau quantile of y given X; 
+\code{PE} the in-sample prediction error.
 }
 \description{
 Model averaging for quantile regression by J-fold cross validation.
@@ -32,6 +31,7 @@ data(express)
 attach(express)
 y<-express$y
 X<-express[,-1]
+X<-cbind(1,X)
 qrma.fit<-qrma(X, y)
 }
 }
